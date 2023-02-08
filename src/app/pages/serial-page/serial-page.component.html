@@ -1,0 +1,41 @@
+<mat-grid-list [cols]="6" rowHeight="100vh">
+
+    <mat-grid-tile class="main-tile"
+    [colspan]="3"
+    [style.background]="'white'"
+    >
+     <img src="./assets/Logo Megablok-54.png" alt="">
+    </mat-grid-tile>
+  
+    <mat-grid-tile class="main-tile"
+    [colspan]="3"
+    [style.background]="'#d8d8d8'"
+    >
+     <div class="serial-screen">
+       <h1>Let's Get Started!</h1>
+       <p>Please enter your serial number below</p>
+       <p>
+        <form 
+  class="login100-form" 
+  autocomplete="off"
+  [formGroup]="serialForm"
+  (ngSubmit)="setSerial()">
+  
+        <mat-form-field appearance="fill">
+          <mat-label>Enter your serial number</mat-label>
+          <input matInput 
+          placeholder="Enter your device's serial number"
+          type="text"
+          formControlName="serial"
+          >
+          <mat-error *ngIf="serialForm.value.serial.invalid">Serial Number must be at least 6 characters long</mat-error>
+          <!-- <mat-icon matSuffix>sentiment_very_satisfied</mat-icon> -->
+          <mat-hint>Must be at least 6 characters long</mat-hint>
+        </mat-form-field>
+      
+       <button mat-raised-button color="primary"
+       [disabled]="serialForm.invalid">SUBMIT</button>
+      </form>
+     </div>
+    </mat-grid-tile>
+  </mat-grid-list>
