@@ -2,4 +2,12 @@
 @import "~@angular/material/prebuilt-themes/indigo-pink.css";
 @import url("https://fonts.googleapis.com/icon?family=Material+Icons");
 
-body { margin: 0; font-family: "Montserrat", sans-serif !important; }
+body { margin: 0; font-family: "Open Sans", Arial, sans-serif !important; }
+
+.h1, .h2, .h3, .h4, .h5, .h6, h1, h2, h3, h4, h5, h6 {
+    margin-bottom: 10px;
+font-family: "Open Sans",Arial,sans-serif;
+font-weight: 600;
+line-height: 1.2;
+}
+

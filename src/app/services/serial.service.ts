@@ -1,4 +1,4 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { catchError, map, of, tap, delay } from 'rxjs';
 import { environment } from 'src/environments/environment';
@@ -20,10 +20,11 @@ export class SerialService {
   setSerial( serialNumber:string) {
 
     const url = this.serialUrl;
-    const headers = new HttpHeaders()
-    .set('x-token', 'true');
+    
+    let params = new HttpParams();
+    params = params.append('serial', serialNumber);
 
-    return  this.http.get<AuthResponse>(url)
+    return  this.http.get<AuthResponse>(url, {params})
     .pipe(delay(1000),
       tap( resp => {
         console.log(resp, '<== respons from auth service')

@@ -27,6 +27,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { WifiPageComponent } from './pages/wifi-page/wifi-page.component';
 import { WifiPasswordInputComponent } from './components/wifi-password-input/wifi-password-input.component';
 import { MainPageComponent } from './pages/main-page/main-page.component';
+import { WelcomePageComponent } from './pages/welcome-page/welcome-page.component';
 
 
 
@@ -36,7 +37,8 @@ import { MainPageComponent } from './pages/main-page/main-page.component';
     SerialPageComponent,
     WifiPageComponent,
     WifiPasswordInputComponent,
-    MainPageComponent
+    MainPageComponent,
+    WelcomePageComponent
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   imports: [

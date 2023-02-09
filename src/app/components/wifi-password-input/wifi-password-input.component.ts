@@ -1,9 +1,10 @@
 import { WifiService } from './../../services/wifi.service';
 import { Network } from './../../models/network.model';
 import { Router } from '@angular/router';
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input,Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { SerialService } from 'src/app/services/serial.service';
+import { EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'app-wifi-password-input',
@@ -13,6 +14,7 @@ import { SerialService } from 'src/app/services/serial.service';
 export class WifiPasswordInputComponent implements OnInit {
 
   @Input() network!: Network;
+  @Output() outputValue: EventEmitter<boolean> = new EventEmitter();
 
   wifiForm: FormGroup = this.formBuilder.group({
     password: ['', [Validators.required, Validators.minLength(8)]]
@@ -29,17 +31,17 @@ export class WifiPasswordInputComponent implements OnInit {
 
   setWifi() {
     const {password} = this.wifiForm.value;
-        console.log(this.wifiForm.value)
       const ssid = this.network.SSID;
-  
+        this.outputValue.emit(true);
         this.wifiService.setWifi(ssid,password)
         .subscribe( isValid => {
           console.log(isValid, "Valid from set wifi")
           if ( isValid === true ) {
+            console.log("outputValue", this.outputValue)
             this.router.navigateByUrl('/main-page')
           } else {
+            this.outputValue.emit(false);
             window.alert('The password is not correct for this wifi network.')
-
           }
       })
   

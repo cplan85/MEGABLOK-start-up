@@ -1,56 +1,24 @@
-<mat-grid-list [cols]="6" rowHeight="100vh">
+<mat-grid-list [cols]="cols" [rowHeight]="rowHeight">
 
     <mat-grid-tile class="main-tile"
-    [colspan]="3"
+    [colspan]="cols/2"
     [style.background]="'#d8d8d8'"
+    [rowspan]="logoRowSpan"
     >
-     <img src="./assets/logo_grande.png" alt="">
+     <img class="wifi-logo" 
+     src="./assets/Community-Locker-01-300x67-2.png" 
+     srcset="./assets/Community-Locker-01-300x67-2.png 960w, ./assets/logo_grande.png 2000w"
+     alt="">
     </mat-grid-tile>
   
     <mat-grid-tile class="main-tile"
-    [colspan]="3"
+    [colspan]="cols/2"
     [style.background]="'white'"
+    [rowspan]="formRowSpan"
     >
-     <div class="serial-screen">
+     <div class="wifi-screen">
        <h1>Let's Connect you to a network!</h1>
        <p>Please select a wifi network to proceed to the main page</p>
-       <!--
-       <p>
-        <mat-selection-list #networksList [multiple]="false">
-            <mat-list-option *ngFor="let network of networks" [value]="network" (click)="toggleValue(network.SSID)">
-                
-              {{network.SSID}}
-              <ng-template [ngIf]="networksList.selectedOptions.selected[0] && networksList.selectedOptions.selected[0].value === network"><div>
-                
-                Content to render when condition is
-                true.</div></ng-template>
-            </mat-list-option>
-          </mat-selection-list>
-          <ng-template [ngIf]="networksList.selectedOptions.hasValue()"><div>
-        
-            
-            <form 
-            class="login100-form" 
-            autocomplete="off"
-            [formGroup]="serialForm"
-            (ngSubmit)="setSerial()">
-            
-            <mat-form-field appearance="outline">
-                <mat-label>Enter password for {{networksList.selectedOptions.selected[0].value.SSID}} </mat-label>
-                <input matInput 
-                [placeholder]="'Enter password for ' + networksList.selectedOptions.selected[0].value.SSID"
-                type="password"
-                formControlName="serial"
-                >
-                <mat-error *ngIf="serialForm.value.serial.invalid">Enter Password</mat-error>
-                 <mat-icon matSuffix>sentiment_very_satisfied</mat-icon> 
-              </mat-form-field>
-                
-       <button mat-raised-button color="primary"
-       [disabled]="serialForm.invalid">PROCEED</button>
-      </form>
-            
-        </div></ng-template> -->
      
 
         <cdk-accordion class="example-accordion">
@@ -64,10 +32,12 @@
               [attr.aria-expanded]="accordionItem.expanded"
               [attr.aria-controls]="'accordion-body-' + index">
               <div class="example-accordion-item-header" (click)="accordionItem.toggle()">
-                {{ network.SSID }}
+                <span class="wifi-option">{{ network.SSID }}<img class="wifi-icon" [src]="setWifiImgSrc(network.SignalStrength)" alt="signal-strength"></span>
                 <span class="example-accordion-item-description">
              
-                  <div *ngIf="accordionItem.expanded; else elseBlock">Cancel</div>
+                  <div *ngIf="accordionItem.expanded; else elseBlock">
+                    <mat-icon>close</mat-icon>
+                  </div>
                   <ng-template #elseBlock><mat-icon>expand_more</mat-icon></ng-template>
                 </span>
               </div>
@@ -77,10 +47,13 @@
                 [style.display]="accordionItem.expanded ? '' : 'none'"
                 [attr.id]="'accordion-body-' + index"
                 [attr.aria-labelledby]="'accordion-header-' + index">
-              <app-wifi-password-input [network]="network"></app-wifi-password-input>
+              <app-wifi-password-input [network]="network" (outputValue)="showSpinner = $event"></app-wifi-password-input>
               </div>
             </cdk-accordion-item>
           </cdk-accordion>
+          <div class="spinner-div">
+            <div *ngIf="showSpinner"><mat-spinner></mat-spinner></div>
+        </div>
 
      </div>
     </mat-grid-tile>
