@@ -1,12 +1,31 @@
+.main-container {
+    background-image: url("/assets/illustration.svg");
+    background-repeat: no-repeat;
+    background-size: auto;
+    background-position:bottom;
+}
+
 .welcome-div {
     height:100vh;
     flex-direction:column;
     display: flex;
     align-items: center;
+    
+   
+}
+.content-container {
+    background: rgba(255, 253, 252, 0.9);
+    padding: 2rem;
+    width: 50%;
+    flex-direction:column;
+    display: flex;
+    align-items: center;
     justify-content: center;
+    border-radius:2rem;
+
 }
 
-.welcome-div > p {
+.content-container > p {
     width:50%;
     text-align:center;
 }
@@ -19,4 +38,8 @@
     font-family: 'Montserrat', sans-serif;
     font-weight:600;
     width: 33%;
+}
+
+.welcome-img {
+    max-width: 75%;
 }

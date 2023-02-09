@@ -1,10 +1,14 @@
-<div class="welcome-div">
-    <img class="get-started" 
-    srcset="./assets/Community-Locker-30.png 960w, ./assets/logo.png 2000w"
-    src="./assets/Community-Locker-30.png" 
-    alt="">
-   <h1>Welcome User</h1>
-   <p>We just need to get some more information from you before you can access the main app</p>
-
-   <button class="btn1 " mat-fab extended color="primary" [routerLink]="['/wifi-setup']">PROCEED</button>
-   </div>
+<div class="main-container">
+    <div class="welcome-div">
+        <div class="content-container">
+            <img class="welcome-img"
+            srcset="./assets/Logo-Megablok-54.png 960w, ./assets/Logo Megablok-54.png 2000w"
+            src="./assets/Community-Locker-30.png"
+            alt="">
+                   <h1>Welcome User</h1>
+                   <p>We just need to get some more information from you before you can access the main app!</p>
+                
+                   <button class="btn1 " mat-fab extended color="primary" [routerLink]="['/wifi-setup']">PROCEED</button>
+        </div>
+       </div>
+</div>

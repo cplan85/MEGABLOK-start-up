@@ -47,9 +47,9 @@ export class SerialPageComponent implements OnInit {
 
   ngOnInit(): void {
 
-     if (localStorage.getItem('serial') !== null) {
-       this.router.navigateByUrl('/welcome')
-     }
+    //  if (localStorage.getItem('serial') !== null) {
+    //    this.router.navigateByUrl('/welcome')
+    //  }
   }
 
   ngOnDestroy() {
