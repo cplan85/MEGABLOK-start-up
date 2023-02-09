@@ -5,10 +5,13 @@
     [style.background]="'#d8d8d8'"
     [rowspan]="logoRowSpan"
     >
-     <img class="wifi-logo" 
-     src="./assets/Community-Locker-01-300x67-2.png" 
-     srcset="./assets/Community-Locker-01-300x67-2.png 960w, ./assets/logo_grande.png 2000w"
-     alt="">
+     <div>
+       <picture>
+        <source media="(min-width:960px)" srcset="./assets/logo_grande.png">
+        <source media="(min-width:465px)" srcset="./assets/Community-Locker-30.png">
+        <img class="wifi-logo" src="./assets/Community-Locker-01-300x67-2.png" alt="Main-Logo">
+           </picture>
+     </div>
     </mat-grid-tile>
   
     <mat-grid-tile class="main-tile"

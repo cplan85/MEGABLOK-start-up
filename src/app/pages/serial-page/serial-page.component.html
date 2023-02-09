@@ -14,10 +14,11 @@
     [style.background]="'#d8d8d8'"
     >
      <div class="serial-screen">
-        <img class="get-started" 
-        srcset="./assets/Community-Locker-30.png 960w, ./assets/logo.png 2000w"
-        src="./assets/Community-Locker-30.png" 
-        alt="">
+      <picture>
+        <source media="(min-width:960px)" srcset="./assets/logo.png">
+        <source media="(min-width:465px)" srcset="./assets/Community-Locker-30.png">
+        <img class="get-started" src="./assets/Community-Locker-30.png" alt="Main-Logo">
+      </picture>
        <h1>Let's Get Started!</h1>
        <p>Please enter your serial number below</p>
        <p>

@@ -3,7 +3,6 @@ import { Network } from './../../models/network.model';
 import { Router } from '@angular/router';
 import { Component, OnInit, Input,Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { SerialService } from 'src/app/services/serial.service';
 import { EventEmitter } from '@angular/core';
 
 @Component({
@@ -37,7 +36,8 @@ export class WifiPasswordInputComponent implements OnInit {
         .subscribe( isValid => {
           console.log(isValid, "Valid from set wifi")
           if ( isValid === true ) {
-            console.log("outputValue", this.outputValue)
+            localStorage.setItem('ssid', ssid)
+            localStorage.setItem('wifiPassword', password)
             this.router.navigateByUrl('/main-page')
           } else {
             this.outputValue.emit(false);
