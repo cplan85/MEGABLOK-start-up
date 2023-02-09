@@ -1,7 +1,7 @@
 import { WifiService } from './../../services/wifi.service';
 import { Network } from './../../models/network.model';
 import { Router } from '@angular/router';
-import { Component, OnInit, Input,Output } from '@angular/core';
+import { Component, Input,Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { EventEmitter } from '@angular/core';
 
@@ -10,7 +10,7 @@ import { EventEmitter } from '@angular/core';
   templateUrl: './wifi-password-input.component.html',
   styleUrls: ['./wifi-password-input.component.scss']
 })
-export class WifiPasswordInputComponent implements OnInit {
+export class WifiPasswordInputComponent {
 
   @Input() network!: Network;
   @Output() outputValue: EventEmitter<boolean> = new EventEmitter();
@@ -24,17 +24,12 @@ export class WifiPasswordInputComponent implements OnInit {
     private formBuilder: FormBuilder,
     private router: Router) { }
 
-  ngOnInit(): void {
-    console.log(this.network, "at child")
-  }
-
   setWifi() {
     const {password} = this.wifiForm.value;
       const ssid = this.network.SSID;
         this.outputValue.emit(true);
         this.wifiService.setWifi(ssid,password)
         .subscribe( isValid => {
-          console.log(isValid, "Valid from set wifi")
           if ( isValid === true ) {
             localStorage.setItem('ssid', ssid)
             localStorage.setItem('wifiPassword', password)

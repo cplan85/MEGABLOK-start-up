@@ -60,12 +60,10 @@ export class SerialPageComponent implements OnInit {
 
   setSerial() {
     const {serial} = this.serialForm.value;
-        console.log(this.serialForm.value)
       
         this.showSpinner = true;
         this.serialService.setSerial(serial)
         .subscribe( isValid => {
-          console.log(isValid, "Valid from set serial")
           if ( isValid === true ) {
             localStorage.setItem('serial', serial)
             this.router.navigateByUrl('/welcome')

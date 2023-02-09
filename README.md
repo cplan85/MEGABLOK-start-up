@@ -2,6 +2,9 @@
 
 This App mimics a user sign-up sequence for Megablok's app, where the User must first input their product serial number, which will then lead to a User-Friendly Welcome Screen. After proceeding from the Welcome Screen, the app will make a fake get request to gather wifi networks with their strengh signals, and then the user must select a network and type in a password in order to proceed to the main-page.
 
+## **Preview**
+## ![preview gif](src/assets/screen-capture.png)
+
 ### Built With
 
 * ![Angular](https://img.shields.io/badge/Angular-DD0031?style=for-the-badge&logo=angular&logoColor=white)
@@ -11,7 +14,7 @@ Tools Used:
 * ![Illustrator](https://img.shields.io/badge/Adobe%20Illustrator-FF9A00?style=for-the-badge&logo=adobe%20illustrator&logoColor=white)
 
 APIs Used: 
-* ![TicketMaster](https://img.shields.io/badge/Fake%20API-0592CD?style=for-the-badge)
+* ![TicketMaster](https://img.shields.io/badge/Fake%20APIS-000000?style=for-the-badge)
 
 ## :wrench: **Tech used in this project**
 Front-End: Angular with [Angular Material](https://material.angular.io/) is used for the front-end UI Components. 
@@ -24,9 +27,11 @@ A fake call is made to the setWifi endpoint with the SSID and password being pas
 
 Main-app Page: This page is essentially blank, but the user may only be able to access this page if a 'ssid' and 'wifiPassword' are found in local storage. Otherwise, the app redirects to the introductory page, which may or may not redirect to the welcome page (depending on if local storage has a serial value). Angular's Authorization guard with the CanActivate method is used on welcome-page link to allow or redirect the user to the initial page.
 
-  serialUrl: 'https://raw.githubusercontent.com/lbernalsierra/FakeAPI/main/CheckLicense.json',
-  networksUrl: 'https://raw.githubusercontent.com/lbernalsierra/FakeAPI/main/Networks.json',
-  setWifiUrl: 'https://raw.githubusercontent.com/lbernalsierra/FakeAPI/main/SetWifi.json',
+Styling: Angular Material's Theme is customized with a theme.scss that updates Material's three main theme colors of "primary", "accent", and "warn". Breakpoints are handled with a breakpoint Service that invokes the breakpoint Observer.
+
+ -  serialUrl: 'https://raw.githubusercontent.com/lbernalsierra/FakeAPI/main/CheckLicense.json',
+ -  networksUrl: 'https://raw.githubusercontent.com/lbernalsierra/FakeAPI/main/Networks.json',
+ -  setWifiUrl: 'https://raw.githubusercontent.com/lbernalsierra/FakeAPI/main/SetWifi.json',
 
 ## Development server
 

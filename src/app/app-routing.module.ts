@@ -11,10 +11,7 @@ const routes: Routes = [
   {path: 'main-page', component: MainPageComponent, canActivate: [AuthGuard]},
   {path: 'wifi-setup', component: WifiPageComponent},
   {path: 'welcome', component: WelcomePageComponent},
-  {
-  path: '**',
-   redirectTo: ''
-  }
+  {path: '**', redirectTo: ''}
 ];
 
 @NgModule({
