@@ -2,39 +2,86 @@
 
     <mat-grid-tile class="main-tile"
     [colspan]="3"
-    [style.background]="'white'"
+    [style.background]="'#d8d8d8'"
     >
      <img src="./assets/logo_grande.png" alt="">
     </mat-grid-tile>
   
     <mat-grid-tile class="main-tile"
     [colspan]="3"
-    [style.background]="'#d8d8d8'"
+    [style.background]="'white'"
     >
      <div class="serial-screen">
        <h1>Let's Connect you to a network!</h1>
+       <p>Please select a wifi network to proceed to the main page</p>
+       <!--
        <p>
-        <form 
-  class="login100-form" 
-  autocomplete="off"
-  [formGroup]="serialForm"
-  (ngSubmit)="setSerial()">
-  
-        <mat-form-field appearance="fill">
-          <mat-label>Enter your serial number</mat-label>
-          <input matInput 
-          placeholder="Enter your device's serial number"
-          type="text"
-          formControlName="serial"
-          >
-          <mat-error *ngIf="serialForm.value.serial.invalid">Serial Number must be at least 6 characters long</mat-error>
-          <!-- <mat-icon matSuffix>sentiment_very_satisfied</mat-icon> -->
-          <mat-hint>Must be at least 6 characters long</mat-hint>
-        </mat-form-field>
-      
+        <mat-selection-list #networksList [multiple]="false">
+            <mat-list-option *ngFor="let network of networks" [value]="network" (click)="toggleValue(network.SSID)">
+                
+              {{network.SSID}}
+              <ng-template [ngIf]="networksList.selectedOptions.selected[0] && networksList.selectedOptions.selected[0].value === network"><div>
+                
+                Content to render when condition is
+                true.</div></ng-template>
+            </mat-list-option>
+          </mat-selection-list>
+          <ng-template [ngIf]="networksList.selectedOptions.hasValue()"><div>
+        
+            
+            <form 
+            class="login100-form" 
+            autocomplete="off"
+            [formGroup]="serialForm"
+            (ngSubmit)="setSerial()">
+            
+            <mat-form-field appearance="outline">
+                <mat-label>Enter password for {{networksList.selectedOptions.selected[0].value.SSID}} </mat-label>
+                <input matInput 
+                [placeholder]="'Enter password for ' + networksList.selectedOptions.selected[0].value.SSID"
+                type="password"
+                formControlName="serial"
+                >
+                <mat-error *ngIf="serialForm.value.serial.invalid">Enter Password</mat-error>
+                 <mat-icon matSuffix>sentiment_very_satisfied</mat-icon> 
+              </mat-form-field>
+                
        <button mat-raised-button color="primary"
-       [disabled]="serialForm.invalid">SUBMIT</button>
+       [disabled]="serialForm.invalid">PROCEED</button>
       </form>
+            
+        </div></ng-template> -->
+     
+
+        <cdk-accordion class="example-accordion">
+            <cdk-accordion-item
+              *ngFor="let network of networks; let index = index;"
+              #accordionItem="cdkAccordionItem"
+              class="example-accordion-item"
+              role="button"
+              tabindex="0"
+              [attr.id]="'accordion-header-' + index"
+              [attr.aria-expanded]="accordionItem.expanded"
+              [attr.aria-controls]="'accordion-body-' + index">
+              <div class="example-accordion-item-header" (click)="accordionItem.toggle()">
+                {{ network.SSID }}
+                <span class="example-accordion-item-description">
+             
+                  <div *ngIf="accordionItem.expanded; else elseBlock">Cancel</div>
+                  <ng-template #elseBlock><mat-icon>expand_more</mat-icon></ng-template>
+                </span>
+              </div>
+              <div
+                class="example-accordion-item-body"
+                role="region"
+                [style.display]="accordionItem.expanded ? '' : 'none'"
+                [attr.id]="'accordion-body-' + index"
+                [attr.aria-labelledby]="'accordion-header-' + index">
+              <app-wifi-password-input [network]="network"></app-wifi-password-input>
+              </div>
+            </cdk-accordion-item>
+          </cdk-accordion>
+
      </div>
     </mat-grid-tile>
   </mat-grid-list>

@@ -4,7 +4,10 @@
 
 export const environment = {
   production: false,
-  serialUrl: 'https://raw.githubusercontent.com/lbernalsierra/FakeAPI/main/CheckLicense.json'
+  serialUrl: 'https://raw.githubusercontent.com/lbernalsierra/FakeAPI/main/CheckLicense.json',
+  networksUrl: 'https://raw.githubusercontent.com/lbernalsierra/FakeAPI/main/Networks.json',
+  setWifiUrl: 'https://raw.githubusercontent.com/lbernalsierra/FakeAPI/main/SetWifi.json',
+
 };
 
 /*

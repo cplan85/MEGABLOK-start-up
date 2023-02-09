@@ -14,7 +14,7 @@ export class SerialPageComponent implements OnInit {
     serial: ['', [Validators.required, Validators.minLength(6)]]
 
   })
-
+  showSpinner: boolean = false;
   constructor(private serialService:SerialService, private formBuilder: FormBuilder, private router: Router) { }
 
   ngOnInit(): void {
@@ -27,7 +27,7 @@ export class SerialPageComponent implements OnInit {
     const {serial} = this.serialForm.value;
         console.log(this.serialForm.value)
       
-  
+        this.showSpinner = true;
         this.serialService.setSerial(serial)
         .subscribe( isValid => {
           console.log(isValid, "Valid from set serial")

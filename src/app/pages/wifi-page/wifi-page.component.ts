@@ -1,7 +1,11 @@
-import { SerialService } from './../../services/serial.service';
+import { Network } from './../../models/network.model';
+import { WifiService } from './../../services/wifi.service';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { MatSelectionList } from '@angular/material';
+import { ViewChild } from '@angular/core';
+import { MatSelectionListChange } from '@angular/material/typings';
 
 @Component({
   selector: 'app-wifi-page',
@@ -10,35 +14,37 @@ import { Router } from '@angular/router';
 })
 export class WifiPageComponent implements OnInit {
 
+  @ViewChild(MatSelectionList, {static: true})
+//private selectionList!: MatSelectionList;
+
   serialForm: FormGroup = this.formBuilder.group({
-    serial: ['', [Validators.required, Validators.minLength(6)]]
+    serial: ['', [Validators.required, Validators.minLength(8)]]
 
   })
 
+  networks: Network[] = [];
+
   constructor(private formBuilder: FormBuilder,
     private router: Router,
-    private serialService:SerialService) { }
+    private wifiService:WifiService) { }
 
   ngOnInit(): void {
+  //   this.selectionList.selectionChange.subscribe((s: MatSelectionListChange) => {          
+
+  //     this.selectionList.deselectAll();
+  //     s.option.selected = true;
+  // });
+    this.getNetworks()
   }
 
-  setSerial() {
-    const {serial} = this.serialForm.value;
-        console.log(this.serialForm.value)
-      
-  
-        this.serialService.setSerial(serial)
-        .subscribe( isValid => {
-          console.log(isValid, "Valid from set serial")
-          if ( isValid === true ) {
-            localStorage.setItem('serial', serial)
-            this.router.navigateByUrl('/wifi-setup')
-          } else {
-            window.alert('This serial does not match any on file.')
+  toggleValue(value:string) {
+   // console.log('clicked', this.selectionList.selectedOptions.selected[0].value)
+  }
 
-          }
-      })
-  
-    }
+  getNetworks() {
+    this.wifiService.getNetworks().subscribe(networks => {
+      this.networks = networks;
+    })
+  }
 
 }

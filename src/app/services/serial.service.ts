@@ -1,6 +1,6 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { catchError, map, Observable, of, tap } from 'rxjs';
+import { catchError, map, of, tap, delay } from 'rxjs';
 import { environment } from 'src/environments/environment';
 
 export interface AuthResponse {
@@ -24,7 +24,7 @@ export class SerialService {
     .set('x-token', 'true');
 
     return  this.http.get<AuthResponse>(url)
-    .pipe(
+    .pipe(delay(1000),
       tap( resp => {
         console.log(resp, '<== respons from auth service')
 
